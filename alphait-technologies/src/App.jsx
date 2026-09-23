@@ -3,6 +3,7 @@ import AnnouncementBar from './components/AnnouncementBar.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
+import CustomCursor from './components/CustomCursor.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Services from './pages/Services.jsx'
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <CustomCursor />
       <AnnouncementBar />
       <Header />
       <main id="main">

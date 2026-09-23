@@ -1231,6 +1231,26 @@ ol {
   padding-bottom: 46px;
 }
 
+.footer__col {
+  min-width: 0;
+}
+
+.brand--footer .brand__logo {
+  width: 52px;
+  height: 52px;
+}
+
+.brand--footer .brand__text {
+  flex-wrap: wrap;
+  gap: 0 6px;
+  white-space: normal;
+}
+
+.brand--footer .brand__text strong,
+.brand--footer .brand__text span {
+  font-size: 1.45rem;
+}
+
 .footer__about {
   margin-top: 18px;
   font-size: 0.93rem;
@@ -1712,5 +1732,165 @@ ol {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------- custom cursor */
+
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cursor-visible .cursor {
+  opacity: 1;
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* Centre dot — follows the pointer exactly. */
+.cursor__dot::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--grad);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85), 0 0 12px rgba(23, 184, 255, 0.8);
+  transition: transform 0.2s ease, opacity 0.2s ease, width 0.2s ease, height 0.2s ease,
+    margin 0.2s ease, border-radius 0.2s ease;
+}
+
+.cursor__dot[data-state='hover']::before {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* Text fields: dot becomes a blinking code-editor caret. */
+.cursor__dot[data-state='text']::before {
+  width: 3px;
+  height: 22px;
+  margin: -11px 0 0 -1.5px;
+  border-radius: 2px;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+/* Trailing ring — eased toward the pointer in JS. */
+.cursor__ring > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cursor__orbit {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--blue-700), var(--cyan-400), transparent 70%, var(--blue-700));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
+  animation: cursor-spin 2.4s linear infinite;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    margin 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+}
+
+.cursor__glyph {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 50%;
+  background: rgba(11, 63, 228, 0.12);
+  backdrop-filter: blur(2px);
+  color: var(--blue-700);
+  font: 700 0.85rem/1 Consolas, 'Courier New', monospace;
+  letter-spacing: -0.04em;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cursor__ring[data-state='hover'] .cursor__orbit {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  animation-duration: 1.2s;
+}
+
+.cursor__ring[data-state='hover'] .cursor__glyph {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cursor__ring[data-state='text'] .cursor__orbit {
+  opacity: 0;
+}
+
+/* Click feedback. */
+.cursor-pressed .cursor__orbit {
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+}
+
+.cursor-pressed .cursor__ring[data-state='hover'] .cursor__orbit {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+}
+
+.cursor-pressed .cursor__glyph {
+  transform: scale(0.85);
+}
+
+/* Binary trail — small 0/1 bits that float up and fade out. */
+.cursor-bit {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  font: 700 0.72rem/1 Consolas, 'Courier New', monospace;
+  color: var(--cyan-400);
+  text-shadow: 0 0 6px rgba(23, 184, 255, 0.6);
+  animation: cursor-bit 0.9s ease-out forwards;
+}
+
+@keyframes cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes cursor-bit {
+  from {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift, 0px)), calc(-50% - 26px)) scale(0.6);
   }
 }
