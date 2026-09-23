@@ -172,7 +172,7 @@ export const aiProgram = {
     'Project & Career Support',
     'Strengthen Your Technical Profile with Practical Experience',
   ],
-  registerUrl: 'https://lnkd.in/dik4F3yg',
+  registerUrl: 'https://forms.gle/MQ2DZuX2rba2BWpq8',
   contactEmail: company.email,
   contactEmailHref: company.emailHref,
 }
