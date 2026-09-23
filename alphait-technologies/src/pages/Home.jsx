@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import HeroSlider from '../components/HeroSlider.jsx'
-import AiProgramPromo from '../components/AiProgramPromo.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import CallbackForm from '../components/CallbackForm.jsx'
 import Icon from '../components/Icon.jsx'
@@ -10,8 +9,6 @@ export default function Home() {
   return (
     <>
       <HeroSlider />
-
-      <AiProgramPromo />
 
       <section className="section">
         <div className="container intro">

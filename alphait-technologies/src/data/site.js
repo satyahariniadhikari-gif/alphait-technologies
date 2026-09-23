@@ -154,25 +154,3 @@ export const jobs = [
       'Deliver instructor-led classroom and online sessions in cloud, data and web technologies.',
   },
 ]
-
-export const aiProgram = {
-  title: 'AI Training Program + Live Project Experience',
-  batchLabel: 'Oct 1 Batch',
-  startDate: '2026-10-01',
-  startDateLabel: 'October 1, 2026',
-  eligibility: ['USA', 'Canada'],
-  summary:
-    'An industry-oriented AI Training Program with Live Project Experience for candidates in the USA & Canada. Build practical AI/ML skills and gain real-world project experience.',
-  benefits: [
-    'AI & Machine Learning Training',
-    'Hands-on Live Project Experience',
-    'Real-World Industry Exposure',
-    'Practical AI/ML Implementation',
-    'Guidance from Experienced Professionals',
-    'Project & Career Support',
-    'Strengthen Your Technical Profile with Practical Experience',
-  ],
-  registerUrl: 'https://forms.gle/MQ2DZuX2rba2BWpq8',
-  contactEmail: company.email,
-  contactEmailHref: company.emailHref,
-}
