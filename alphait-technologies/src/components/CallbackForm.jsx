@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { company } from '../data/site.js'
 
-const EMPTY = { name: '', email: '', phone: '', subject: 'Consulting', message: '' }
+const EMPTY = { name: '', email: '', subject: 'Consulting', message: '' }
 
 export default function CallbackForm({ compact = false }) {
   const [values, setValues] = useState(EMPTY)
@@ -19,7 +19,6 @@ export default function CallbackForm({ compact = false }) {
     if (!values.name.trim()) next.name = 'Please tell us your name.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()))
       next.email = 'Please enter a valid email address.'
-    if (!values.phone.trim()) next.phone = 'A phone number helps us call you back.'
     if (values.message.trim().length < 10)
       next.message = 'Please add a little more detail (10+ characters).'
     return next
@@ -35,7 +34,6 @@ export default function CallbackForm({ compact = false }) {
     const body = [
       `Name: ${values.name}`,
       `Email: ${values.email}`,
-      `Phone: ${values.phone}`,
       `Interested in: ${values.subject}`,
       '',
       values.message,
@@ -78,31 +76,16 @@ export default function CallbackForm({ compact = false }) {
         </label>
       </div>
 
-      <div className="callback__row">
-        <label className="field">
-          <span>Phone number</span>
-          <input
-            name="phone"
-            type="tel"
-            value={values.phone}
-            onChange={update}
-            aria-invalid={Boolean(errors.phone)}
-            placeholder="+1 (___) ___-____"
-          />
-          {errors.phone ? <em className="field__error">{errors.phone}</em> : null}
-        </label>
-
-        <label className="field">
-          <span>I&apos;m interested in</span>
-          <select name="subject" value={values.subject} onChange={update}>
-            <option>Consulting</option>
-            <option>Training</option>
-            <option>Application Development</option>
-            <option>Careers</option>
-            <option>Something else</option>
-          </select>
-        </label>
-      </div>
+      <label className="field">
+        <span>I&apos;m interested in</span>
+        <select name="subject" value={values.subject} onChange={update}>
+          <option>Consulting</option>
+          <option>Training</option>
+          <option>Application Development</option>
+          <option>Careers</option>
+          <option>Something else</option>
+        </select>
+      </label>
 
       <label className="field">
         <span>How can we help?</span>
