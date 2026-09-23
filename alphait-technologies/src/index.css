@@ -1342,9 +1342,27 @@ ol {
 /* ---------------------------------------------------------- announcement */
 
 .announce {
-  background: linear-gradient(90deg, #ff6a3d 0%, #ff3d77 50%, var(--blue-700) 100%);
+  background: linear-gradient(
+    90deg,
+    #3ddbff 0%,
+    #9f3dff 25%,
+    var(--blue-700) 50%,
+    #ff3d77 75%,
+    #3ddbff 100%
+  );
+  background-size: 300% 100%;
   color: var(--white);
   font-size: 0.9rem;
+  animation: announce-shift 12s linear infinite;
+}
+
+@keyframes announce-shift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 150% 50%;
+  }
 }
 
 .announce__inner {
