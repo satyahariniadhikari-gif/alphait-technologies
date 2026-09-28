@@ -15,7 +15,7 @@ export default function Header() {
           <Link to="/" className="brand" aria-label={`${company.name} home`}>
             <img className="brand__logo" src={logo} alt={`${company.name} logo`} />
             <span className="brand__text">
-              <strong>AlphaIT</strong>
+              <strong>Alpha IT</strong>
               <span>Technologies</span>
             </span>
           </Link>

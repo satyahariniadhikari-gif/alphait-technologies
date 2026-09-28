@@ -48,7 +48,7 @@ export default function HeroSlider() {
               <Icon name="arrow" size={18} />
             </Link>
             <Link to="/about" className="btn btn--ghost">
-              About AlphaIT
+              About Alpha IT
             </Link>
           </div>
         </div>

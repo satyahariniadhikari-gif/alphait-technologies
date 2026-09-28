@@ -1,6 +1,6 @@
-# AlphaIT Technologies — website
+# Alpha IT Technologies — website
 
-React (Vite) marketing site for AlphaIT Technologies, modelled on the structure of
+React (Vite) marketing site for Alpha IT Technologies, modelled on the structure of
 skilltune.com: top contact bar, sticky primary nav, hero carousel, services, stats,
 careers and a "request a call back" form.
 

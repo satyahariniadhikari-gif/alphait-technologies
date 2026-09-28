@@ -80,7 +80,7 @@ export default function Career() {
       <section className="section section--tint">
         <div className="container two-col">
           <div>
-            <p className="eyebrow">Life at AlphaIT</p>
+            <p className="eyebrow">Life at Alpha IT</p>
             <h2 className="section__title">A people-centric place to build a career</h2>
             <p>
               We are process-oriented but people-centric. Brainstorming is encouraged, contribution

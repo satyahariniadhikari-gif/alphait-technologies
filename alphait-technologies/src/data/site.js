@@ -1,6 +1,6 @@
 export const company = {
-  name: 'AlphaIT Technologies',
-  shortName: 'AlphaIT',
+  name: 'Alpha IT Technologies',
+  shortName: 'Alpha IT',
   tagline:
     'Provide IT consulting, customized solutions and products by creating an environment conducive to excellence in the growth of knowledge.',
   address: '971 US Highway 202 N, Branchburg, NJ 08876',
@@ -22,8 +22,8 @@ export const navLinks = [
 
 export const slides = [
   {
-    eyebrow: 'Welcome to AlphaIT Technologies',
-    title: 'You can trust AlphaIT Technologies',
+    eyebrow: 'Welcome to Alpha IT Technologies',
+    title: 'You can trust Alpha IT Technologies',
     text: company.tagline,
     cta: { label: 'Explore Our Services', to: '/services' },
   },
@@ -34,7 +34,7 @@ export const slides = [
     cta: { label: 'Talk To Us', to: '/contact' },
   },
   {
-    eyebrow: 'Careers at AlphaIT',
+    eyebrow: 'Careers at Alpha IT',
     title: 'Accelerate your career with us',
     text: 'Join a process-oriented, people-centric team where brainstorming is encouraged and contribution is recognised.',
     cta: { label: 'View Open Roles', to: '/career' },
@@ -72,7 +72,7 @@ export const services = [
     slug: 'application-development',
     title: 'Application Development',
     summary:
-      'As a pioneer in IT application development, AlphaIT Technologies effectively helps you meet your technology-specific objectives.',
+      'As a pioneer in IT application development, Alpha IT Technologies effectively helps you meet your technology-specific objectives.',
     points: [
       'Custom web and mobile application build-outs',
       'API, integration and data engineering',

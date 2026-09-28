@@ -11,7 +11,7 @@ export default function Footer() {
           <Link to="/" className="brand brand--footer">
             <img className="brand__logo" src={logo} alt={`${company.name} logo`} />
             <span className="brand__text">
-              <strong>AlphaIT</strong>
+              <strong>Alpha IT</strong>
               <span>Technologies</span>
             </span>
           </Link>
