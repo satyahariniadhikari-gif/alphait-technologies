@@ -2,6 +2,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { slides } from '../data/site.js'
 import Icon from './Icon.jsx'
+import trainingPhoto from '../assets/training-session.jpg'
+import officePhoto from '../assets/office-hq.jpg'
+import teamPhoto from '../assets/team-meeting.jpg'
+
+const PHOTOS = [trainingPhoto, officePhoto, teamPhoto]
 
 const INTERVAL = 6500
 
@@ -32,6 +37,14 @@ export default function HeroSlider() {
       onBlur={() => setPaused(false)}
     >
       <div className="hero__bg" aria-hidden="true">
+        {PHOTOS.map((photo, i) => (
+          <span
+            key={photo}
+            className={`hero__photo${i === index % PHOTOS.length ? ' is-active' : ''}`}
+            style={{ backgroundImage: `url(${photo})` }}
+          />
+        ))}
+        <span className="hero__overlay" />
         <span className="hero__shape hero__shape--a" />
         <span className="hero__shape hero__shape--b" />
         <span className="hero__grid" />

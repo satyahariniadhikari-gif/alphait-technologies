@@ -13,8 +13,7 @@ export default function AnnouncementBar() {
           <span>
             {open
               ? `${aiProgram.batchLabel} · Limited seats · ${aiProgram.eligibility.join(' & ')} only`
-              : 'Registration closed · Next batch date will be updated soon'}
-            {!open && <span className="announce__soon">Coming soon</span>}
+              : `Registration ends on ${aiProgram.registrationEndLabel} · Next batch date will be updated soon`}
           </span>
         </p>
         {open ? (

@@ -1,6 +1,5 @@
 import { aiProgram, daysUntilBatch, isRegistrationOpen } from '../data/site.js'
 import Icon from './Icon.jsx'
-import trainingPhoto from '../assets/training-session.jpg'
 
 export default function AiProgramPromo() {
   const daysLeft = daysUntilBatch()
@@ -11,16 +10,6 @@ export default function AiProgramPromo() {
       <div className="container">
         <div className="promo__card">
           <div className="promo__glow" aria-hidden="true" />
-
-          <figure className="photo promo__photo">
-            <img
-              src={trainingPhoto}
-              alt="An Alpha IT trainer leading a classroom session with professionals at laptops"
-              width="1400"
-              height="790"
-              loading="lazy"
-            />
-          </figure>
 
           <div className="promo__main">
             <ul className="promo__flags">
@@ -60,8 +49,8 @@ export default function AiProgramPromo() {
               </div>
             ) : (
               <div className="promo__date">
-                <span className="promo__date-label">Next batch</span>
-                <strong className="promo__soon">Coming soon</strong>
+                <span className="promo__date-label">{aiProgram.batchLabel}</span>
+                <strong>Registration ends on {aiProgram.registrationEndLabel}</strong>
                 <p className="promo__date-note">
                   Registration for the {aiProgram.batchLabel} has closed. We&apos;ll update you with
                   the next batch date soon.

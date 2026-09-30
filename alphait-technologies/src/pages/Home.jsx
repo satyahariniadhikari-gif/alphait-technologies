@@ -3,6 +3,7 @@ import HeroSlider from '../components/HeroSlider.jsx'
 import AiProgramPromo from '../components/AiProgramPromo.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import CallbackForm from '../components/CallbackForm.jsx'
+import CareersCarousel from '../components/CareersCarousel.jsx'
 import Icon from '../components/Icon.jsx'
 import { company, industries, services, stats, technologies } from '../data/site.js'
 import trainingPhoto from '../assets/training-session.jpg'
@@ -10,9 +11,17 @@ import officePhoto from '../assets/office-hq.jpg'
 import teamPhoto from '../assets/team-meeting.jpg'
 
 const careerPhotos = [
-  { src: trainingPhoto, alt: 'An Alpha IT trainer leading a classroom session' },
-  { src: officePhoto, alt: 'Alpha IT consultants planning a project at the NYC headquarters' },
-  { src: teamPhoto, alt: 'Alpha IT team members collaborating on the rooftop campus' },
+  { src: trainingPhoto, label: 'Training', alt: 'An Alpha IT trainer leading a classroom session' },
+  {
+    src: officePhoto,
+    label: 'Consulting',
+    alt: 'Alpha IT consultants planning a project at the NYC headquarters',
+  },
+  {
+    src: teamPhoto,
+    label: 'Placements',
+    alt: 'Alpha IT team members collaborating on the rooftop campus',
+  },
 ]
 
 export default function Home() {
@@ -148,11 +157,7 @@ export default function Home() {
             </Link>
           </header>
         </div>
-        <div className="careers-strip__photos">
-          {careerPhotos.map((photo) => (
-            <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" />
-          ))}
-        </div>
+        <CareersCarousel photos={careerPhotos} />
       </section>
 
       <section className="section" id="callback">
@@ -180,6 +185,12 @@ export default function Home() {
                 <a href={company.emailHref}>{company.email}</a>
               </li>
             </ul>
+            <img
+              className="callback-block__photo"
+              src={officePhoto}
+              alt="Alpha IT consultants meeting with clients at the headquarters"
+              loading="lazy"
+            />
           </div>
           <div className="callback-block__form">
             <CallbackForm compact />

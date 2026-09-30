@@ -12,6 +12,19 @@ export const company = {
   foundedYear: 2019,
 }
 
+export const legal = {
+  domain: 'www.alphait-technologies.com',
+  lastUpdated: 'September 30, 2026',
+  privacyPath: '/privacy-policy',
+  termsPath: '/terms-of-service',
+  links: [
+    { label: 'Terms of Service', to: '/terms-of-service' },
+    { label: 'Privacy Policy', to: '/privacy-policy' },
+    { label: 'Cookie Policy', to: '/cookie-policy' },
+    { label: 'Equal Opportunity Statement', to: '/equal-opportunity' },
+  ],
+}
+
 export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
@@ -160,6 +173,7 @@ export const aiProgram = {
   batchLabel: 'Oct 1 Batch',
   startDate: '2026-10-01',
   startDateLabel: 'October 1, 2026',
+  registrationEndLabel: 'Oct 1st',
   eligibility: ['USA', 'Canada'],
   summary:
     'An industry-oriented AI Training Program with Live Project Experience for candidates in the USA & Canada. Build practical AI/ML skills and gain real-world project experience.',

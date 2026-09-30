@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { company } from '../data/site.js'
+import { Link } from 'react-router-dom'
+import { company, legal } from '../data/site.js'
 
 const EMPTY = { name: '', email: '', phone: '', subject: 'Consulting', message: '', consent: false }
 
@@ -131,7 +132,15 @@ export default function CallbackForm({ compact = false }) {
             emails and text messages from <strong>{company.name}</strong> about your enquiry, our
             consulting services, training programs and career opportunities. Message &amp; data rates
             may apply. Message frequency varies. Reply STOP to opt out or HELP for help. We do not
-            sell, share or lease your personal data to any third parties.{' '}
+            sell, share or lease your personal data to any third parties. See our{' '}
+            <Link to={legal.privacyPath} target="_blank" rel="noopener noreferrer">
+              Privacy Policy
+            </Link>{' '}
+            and{' '}
+            <Link to={legal.termsPath} target="_blank" rel="noopener noreferrer">
+              Terms of Service
+            </Link>
+            .{' '}
             <abbr className="consent__required" title="required">
               *
             </abbr>

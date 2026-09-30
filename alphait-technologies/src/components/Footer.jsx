@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { company, navLinks, services } from '../data/site.js'
+import { company, legal, navLinks, services } from '../data/site.js'
 import logo from '../assets/alpha-logo.jpeg'
 import Icon from './Icon.jsx'
 
@@ -43,6 +43,17 @@ export default function Footer() {
             <li>
               <Link to="/career">Staffing &amp; Recruitment</Link>
             </li>
+          </ul>
+        </div>
+
+        <div className="footer__col">
+          <h3 className="footer__title">Legal &amp; Policy</h3>
+          <ul className="footer__links">
+            {legal.links.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to}>{link.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
