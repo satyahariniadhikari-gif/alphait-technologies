@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { company } from '../data/site.js'
 
-const EMPTY = { name: '', email: '', subject: 'Consulting', message: '' }
+const EMPTY = { name: '', email: '', phone: '', subject: 'Consulting', message: '', consent: false }
 
 export default function CallbackForm({ compact = false }) {
   const [values, setValues] = useState(EMPTY)
@@ -9,8 +9,8 @@ export default function CallbackForm({ compact = false }) {
   const [sent, setSent] = useState(false)
 
   function update(event) {
-    const { name, value } = event.target
-    setValues((current) => ({ ...current, [name]: value }))
+    const { name, value, type, checked } = event.target
+    setValues((current) => ({ ...current, [name]: type === 'checkbox' ? checked : value }))
     setErrors((current) => ({ ...current, [name]: undefined }))
   }
 
@@ -21,6 +21,9 @@ export default function CallbackForm({ compact = false }) {
       next.email = 'Please enter a valid email address.'
     if (values.message.trim().length < 10)
       next.message = 'Please add a little more detail (10+ characters).'
+    if (values.phone.trim() && !/^[+()\-.\s\d]{7,}$/.test(values.phone.trim()))
+      next.phone = 'Please enter a valid phone number.'
+    if (!values.consent) next.consent = 'Please agree to the terms to send your message.'
     return next
   }
 
@@ -34,6 +37,7 @@ export default function CallbackForm({ compact = false }) {
     const body = [
       `Name: ${values.name}`,
       `Email: ${values.email}`,
+      `Phone: ${values.phone || 'Not provided'}`,
       `Interested in: ${values.subject}`,
       '',
       values.message,
@@ -77,6 +81,19 @@ export default function CallbackForm({ compact = false }) {
       </div>
 
       <label className="field">
+        <span>Phone number (optional)</span>
+        <input
+          name="phone"
+          type="tel"
+          value={values.phone}
+          onChange={update}
+          aria-invalid={Boolean(errors.phone)}
+          placeholder="+1 (555) 123-4567"
+        />
+        {errors.phone ? <em className="field__error">{errors.phone}</em> : null}
+      </label>
+
+      <label className="field">
         <span>I&apos;m interested in</span>
         <select name="subject" value={values.subject} onChange={update}>
           <option>Consulting</option>
@@ -99,6 +116,29 @@ export default function CallbackForm({ compact = false }) {
         />
         {errors.message ? <em className="field__error">{errors.message}</em> : null}
       </label>
+
+      <div className="consent">
+        <label className="consent__label">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={values.consent}
+            onChange={update}
+            aria-invalid={Boolean(errors.consent)}
+          />
+          <span>
+            By submitting this form and providing your phone number, you agree to receive calls,
+            emails and text messages from <strong>{company.name}</strong> about your enquiry, our
+            consulting services, training programs and career opportunities. Message &amp; data rates
+            may apply. Message frequency varies. Reply STOP to opt out or HELP for help. We do not
+            sell, share or lease your personal data to any third parties.{' '}
+            <abbr className="consent__required" title="required">
+              *
+            </abbr>
+          </span>
+        </label>
+        {errors.consent ? <em className="field__error">{errors.consent}</em> : null}
+      </div>
 
       <div className="callback__foot">
         <button type="submit" className="btn btn--accent">

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import PageBanner from '../components/PageBanner.jsx'
 import Icon from '../components/Icon.jsx'
+import teamPhoto from '../assets/team-meeting.jpg'
 import { company, jobs } from '../data/site.js'
 
 const FILTERS = ['All', 'Full Time', 'Part Time', 'Contract']
@@ -78,6 +79,15 @@ export default function Career() {
       </section>
 
       <section className="section section--tint">
+        <figure className="container photo photo--banner">
+          <img
+            src={teamPhoto}
+            alt="Alpha IT team members collaborating on laptops around a table on the rooftop campus"
+            width="1600"
+            height="874"
+            loading="lazy"
+          />
+        </figure>
         <div className="container two-col">
           <div>
             <p className="eyebrow">Life at Alpha IT</p>

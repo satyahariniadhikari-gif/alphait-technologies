@@ -175,4 +175,23 @@ export const aiProgram = {
   registerUrl: 'https://forms.gle/MQ2DZuX2rba2BWpq8',
   contactEmail: company.email,
   contactEmailHref: company.emailHref,
+  // Shown once registration closes; lets visitors ask to hear about the next batch.
+  notifyHref: `${company.emailHref}?subject=${encodeURIComponent(
+    'Please notify me about the next AI Training Program batch',
+  )}`,
+}
+
+// Whole days from today until the batch starts (0 on the start day, negative after).
+export function daysUntilBatch() {
+  const start = new Date(`${aiProgram.startDate}T00:00:00`)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  return Math.round((start - today) / 86400000)
+}
+
+// Registration closes when the batch starts. Set a new startDate to reopen it.
+// Add ?registration=closed to any URL to preview the closed state before the date.
+export function isRegistrationOpen() {
+  if (new URLSearchParams(window.location.search).get('registration') === 'closed') return false
+  return daysUntilBatch() > 0
 }

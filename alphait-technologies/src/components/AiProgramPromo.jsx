@@ -1,15 +1,10 @@
-import { aiProgram } from '../data/site.js'
+import { aiProgram, daysUntilBatch, isRegistrationOpen } from '../data/site.js'
 import Icon from './Icon.jsx'
-
-function daysUntil(isoDate) {
-  const start = new Date(`${isoDate}T00:00:00`)
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  return Math.round((start - today) / 86400000)
-}
+import trainingPhoto from '../assets/training-session.jpg'
 
 export default function AiProgramPromo() {
-  const daysLeft = daysUntil(aiProgram.startDate)
+  const daysLeft = daysUntilBatch()
+  const open = isRegistrationOpen()
 
   return (
     <section className="section promo" id="ai-program" aria-labelledby="ai-program-title">
@@ -17,14 +12,28 @@ export default function AiProgramPromo() {
         <div className="promo__card">
           <div className="promo__glow" aria-hidden="true" />
 
+          <figure className="photo promo__photo">
+            <img
+              src={trainingPhoto}
+              alt="An Alpha IT trainer leading a classroom session with professionals at laptops"
+              width="1400"
+              height="790"
+              loading="lazy"
+            />
+          </figure>
+
           <div className="promo__main">
             <ul className="promo__flags">
-              <li className="promo__flag promo__flag--hot">Limited seats</li>
+              <li className="promo__flag promo__flag--hot">
+                {open ? 'Limited seats' : 'Registration closed'}
+              </li>
               <li className="promo__flag">{aiProgram.eligibility.join(' & ')} only</li>
-              <li className="promo__flag">{aiProgram.batchLabel}</li>
+              <li className="promo__flag">{open ? aiProgram.batchLabel : 'Next batch coming soon'}</li>
             </ul>
 
-            <p className="hero__eyebrow">Registration is now open</p>
+            <p className="hero__eyebrow">
+              {open ? 'Registration is now open' : 'Next batch date will be updated soon'}
+            </p>
             <h2 className="promo__title" id="ai-program-title">
               {aiProgram.title}
             </h2>
@@ -41,15 +50,24 @@ export default function AiProgramPromo() {
           </div>
 
           <aside className="promo__side">
-            <div className="promo__date">
-              <span className="promo__date-label">Batch starts</span>
-              <strong>{aiProgram.startDateLabel}</strong>
-              {daysLeft > 0 && (
+            {open ? (
+              <div className="promo__date">
+                <span className="promo__date-label">Batch starts</span>
+                <strong>{aiProgram.startDateLabel}</strong>
                 <span className="promo__countdown">
                   {daysLeft} {daysLeft === 1 ? 'day' : 'days'} to go
                 </span>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="promo__date">
+                <span className="promo__date-label">Next batch</span>
+                <strong className="promo__soon">Coming soon</strong>
+                <p className="promo__date-note">
+                  Registration for the {aiProgram.batchLabel} has closed. We&apos;ll update you with
+                  the next batch date soon.
+                </p>
+              </div>
+            )}
 
             <ul className="promo__facts">
               <li>
@@ -61,7 +79,7 @@ export default function AiProgramPromo() {
               </li>
               <li>
                 <Icon name="clock" size={18} />
-                <span>Limited seats available</span>
+                <span>{open ? 'Limited seats available' : 'Seats open again with the next batch'}</span>
               </li>
               <li>
                 <Icon name="mail" size={18} />
@@ -69,15 +87,22 @@ export default function AiProgramPromo() {
               </li>
             </ul>
 
-            <a
-              className="btn btn--accent promo__cta"
-              href={aiProgram.registerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Register now &amp; reserve your spot
-              <Icon name="arrow" size={16} />
-            </a>
+            {open ? (
+              <a
+                className="btn btn--accent promo__cta"
+                href={aiProgram.registerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Register now &amp; reserve your spot
+                <Icon name="arrow" size={16} />
+              </a>
+            ) : (
+              <a className="btn btn--accent promo__cta" href={aiProgram.notifyHref}>
+                Notify me about the next batch
+                <Icon name="arrow" size={16} />
+              </a>
+            )}
           </aside>
         </div>
       </div>

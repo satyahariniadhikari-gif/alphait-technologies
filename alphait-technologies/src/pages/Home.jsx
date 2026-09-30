@@ -4,7 +4,16 @@ import AiProgramPromo from '../components/AiProgramPromo.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import CallbackForm from '../components/CallbackForm.jsx'
 import Icon from '../components/Icon.jsx'
-import { company, industries, jobs, services, stats, technologies } from '../data/site.js'
+import { company, industries, services, stats, technologies } from '../data/site.js'
+import trainingPhoto from '../assets/training-session.jpg'
+import officePhoto from '../assets/office-hq.jpg'
+import teamPhoto from '../assets/team-meeting.jpg'
+
+const careerPhotos = [
+  { src: trainingPhoto, alt: 'An Alpha IT trainer leading a classroom session' },
+  { src: officePhoto, alt: 'Alpha IT consultants planning a project at the NYC headquarters' },
+  { src: teamPhoto, alt: 'Alpha IT team members collaborating on the rooftop campus' },
+]
 
 export default function Home() {
   return (
@@ -125,40 +134,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section--tint">
+      <section className="section section--tint careers-strip">
         <div className="container">
           <header className="section__head section__head--split">
             <div>
-              <p className="eyebrow">Careers</p>
-              <h2 className="section__title">
-                We are here to accelerate your job and help you find the way
-              </h2>
+              <h2 className="careers-strip__title">Careers</h2>
+              <p className="careers-strip__lead">
+                We are here to accelerate your job and help you find the way.
+              </p>
             </div>
             <Link to="/career" className="btn btn--primary">
               Show all jobs
             </Link>
           </header>
-          <div className="grid grid--3">
-            {jobs.slice(0, 3).map((job) => (
-              <article key={job.id} className="job-card">
-                <span className="tag">{job.type}</span>
-                <h3>{job.title}</h3>
-                <p>{job.summary}</p>
-                <ul className="job-card__meta">
-                  <li>
-                    <Icon name="pin" size={16} /> {job.location}
-                  </li>
-                  <li>
-                    <Icon name="clock" size={16} /> {job.experience}
-                  </li>
-                </ul>
-                <Link className="link-arrow" to="/career">
-                  View role
-                  <Icon name="arrow" size={16} />
-                </Link>
-              </article>
-            ))}
-          </div>
+        </div>
+        <div className="careers-strip__photos">
+          {careerPhotos.map((photo) => (
+            <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" />
+          ))}
         </div>
       </section>
 
