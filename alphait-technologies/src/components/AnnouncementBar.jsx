@@ -16,22 +16,15 @@ export default function AnnouncementBar() {
               : `Registration ends on ${aiProgram.registrationEndLabel} · Next batch date will be updated soon`}
           </span>
         </p>
-        {open ? (
-          <a
-            className="announce__cta"
-            href={aiProgram.registerUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Register now
-            <Icon name="arrow" size={16} />
-          </a>
-        ) : (
-          <a className="announce__cta" href={aiProgram.notifyHref}>
-            Notify me
-            <Icon name="arrow" size={16} />
-          </a>
-        )}
+        <a
+          className="announce__cta"
+          href={aiProgram.registerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Register now
+          <Icon name="arrow" size={16} />
+        </a>
       </div>
     </div>
   )

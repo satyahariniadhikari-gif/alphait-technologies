@@ -76,22 +76,15 @@ export default function AiProgramPromo() {
               </li>
             </ul>
 
-            {open ? (
-              <a
-                className="btn btn--accent promo__cta"
-                href={aiProgram.registerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Register now &amp; reserve your spot
-                <Icon name="arrow" size={16} />
-              </a>
-            ) : (
-              <a className="btn btn--accent promo__cta" href={aiProgram.notifyHref}>
-                Notify me about the next batch
-                <Icon name="arrow" size={16} />
-              </a>
-            )}
+            <a
+              className="btn btn--accent promo__cta"
+              href={aiProgram.registerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {open ? 'Register now & reserve your spot' : 'Register now'}
+              <Icon name="arrow" size={16} />
+            </a>
           </aside>
         </div>
       </div>

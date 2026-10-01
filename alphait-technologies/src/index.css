@@ -1312,6 +1312,14 @@ ol {
   min-height: 1.2em;
 }
 
+.callback__status--error {
+  color: #c0392b;
+}
+
+.callback__botcheck {
+  display: none;
+}
+
 .map {
   line-height: 0;
 }

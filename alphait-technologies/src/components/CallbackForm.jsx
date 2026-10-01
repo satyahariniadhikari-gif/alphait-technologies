@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { company, legal } from '../data/site.js'
+import { company, legal, web3forms } from '../data/site.js'
 
 const EMPTY = { name: '', email: '', phone: '', subject: 'Consulting', message: '', consent: false }
 
 export default function CallbackForm({ compact = false }) {
   const [values, setValues] = useState(EMPTY)
   const [errors, setErrors] = useState({})
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
   function update(event) {
     const { name, value, type, checked } = event.target
@@ -28,28 +28,41 @@ export default function CallbackForm({ compact = false }) {
     return next
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const found = validate()
     setErrors(found)
     if (Object.keys(found).length > 0) return
 
-    // No backend is wired up yet — hand the enquiry to the visitor's mail client.
-    const body = [
-      `Name: ${values.name}`,
-      `Email: ${values.email}`,
-      `Phone: ${values.phone || 'Not provided'}`,
-      `Interested in: ${values.subject}`,
-      '',
-      values.message,
-    ].join('\n')
+    // Hidden honeypot field: real visitors never tick it, bots often do.
+    const botcheck = event.currentTarget.elements.botcheck?.checked ?? false
 
-    window.location.href = `${company.emailHref}?subject=${encodeURIComponent(
-      `Call back request — ${values.subject}`,
-    )}&body=${encodeURIComponent(body)}`
+    setStatus('sending')
+    try {
+      const response = await fetch(web3forms.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: web3forms.accessKey,
+          subject: `Call back request — ${values.subject}`,
+          from_name: `${company.name} website`,
+          botcheck,
+          name: values.name.trim(),
+          email: values.email.trim(),
+          phone: values.phone.trim() || 'Not provided',
+          interested_in: values.subject,
+          message: values.message.trim(),
+          consent: 'Agreed to calls, emails and texts, Privacy Policy and Terms of Service',
+        }),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok || !result.success) throw new Error(result.message || 'Request failed')
 
-    setSent(true)
-    setValues(EMPTY)
+      setStatus('sent')
+      setValues(EMPTY)
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -149,17 +162,36 @@ export default function CallbackForm({ compact = false }) {
         {errors.consent ? <em className="field__error">{errors.consent}</em> : null}
       </div>
 
+      <input
+        type="checkbox"
+        name="botcheck"
+        className="callback__botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
+
       <div className="callback__foot">
-        <button type="submit" className="btn btn--accent">
-          Request a call back
+        <button type="submit" className="btn btn--accent" disabled={status === 'sending'}>
+          {status === 'sending' ? 'Sending…' : 'Send response'}
         </button>
         <p className="callback__note">
           Or call us directly on <a href={company.phoneHref}>{company.phone}</a>
         </p>
       </div>
 
-      <p className="callback__status" role="status">
-        {sent ? 'Thanks! Your email client should open with the details — we reply within one business day.' : ''}
+      <p
+        className={`callback__status${status === 'error' ? ' callback__status--error' : ''}`}
+        role="status"
+      >
+        {status === 'sent' &&
+          'Thanks! Your request has been sent — we reply within one business day.'}
+        {status === 'error' && (
+          <>
+            Sorry, something went wrong. Please try again or email us at{' '}
+            <a href={company.emailHref}>{company.email}</a>.
+          </>
+        )}
       </p>
     </form>
   )

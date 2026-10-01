@@ -12,6 +12,13 @@ export const company = {
   foundedYear: 2019,
 }
 
+// Web3Forms delivers form submissions to the company inbox. The access key is
+// public by design — it can only be used to send submissions, not read them.
+export const web3forms = {
+  endpoint: 'https://api.web3forms.com/submit',
+  accessKey: '348ea80c-f24a-4eb0-821c-71ba3029cbf2',
+}
+
 export const legal = {
   domain: 'www.alphait-technologies.com',
   lastUpdated: 'September 30, 2026',
@@ -189,10 +196,6 @@ export const aiProgram = {
   registerUrl: 'https://forms.gle/MQ2DZuX2rba2BWpq8',
   contactEmail: company.email,
   contactEmailHref: company.emailHref,
-  // Shown once registration closes; lets visitors ask to hear about the next batch.
-  notifyHref: `${company.emailHref}?subject=${encodeURIComponent(
-    'Please notify me about the next AI Training Program batch',
-  )}`,
 }
 
 // Whole days from today until the batch starts (0 on the start day, negative after).
