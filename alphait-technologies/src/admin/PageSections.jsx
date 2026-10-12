@@ -21,9 +21,14 @@ export default function PageSections({ page, sections }) {
 
   const saved = parseJson(content[layoutKey], null)
   const entries = (saved ?? []).filter((entry) => builtins.has(entry.id) || SECTION_TYPES[entry.type])
-  for (const [id] of sections) {
-    if (!entries.some((entry) => entry.id === id)) entries.push({ id })
-  }
+  // Sections added in code after the admin saved a layout go right after the section that
+  // precedes them in code (or first), not to the end of the page.
+  sections.forEach(([id], index) => {
+    if (entries.some((entry) => entry.id === id)) return
+    const previous = sections[index - 1]?.[0]
+    const at = previous ? entries.findIndex((entry) => entry.id === previous) + 1 : 0
+    entries.splice(at, 0, { id })
+  })
 
   const render = (entry) =>
     entry.type ? (

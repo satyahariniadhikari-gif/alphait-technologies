@@ -4,6 +4,7 @@ import { useCompany } from '../admin/content-context.js'
 import PageBanner from '../components/PageBanner.jsx'
 import CallbackForm from '../components/CallbackForm.jsx'
 import Icon from '../components/Icon.jsx'
+import contactPhoto from '../assets/contact-office.jpg'
 
 export default function Contact() {
   const company = useCompany()
@@ -102,6 +103,33 @@ export default function Contact() {
         id="contact.banner"
         title="Contact Us"
         subtitle="Would you like to speak to one of our consulting organisers? Just submit your contact details and we'll be in touch shortly."
+        image={contactPhoto}
+        aside={
+          <>
+            <div className="hero__panel-card">
+              <Icon name="phone" size={28} />
+              <h2>
+                <a href={company.phoneHref}>
+                  <Editable id="company.phone">{company.phone}</Editable>
+                </a>
+              </h2>
+              <p>
+                <Editable id="header.labels.phone">Direct</Editable>
+              </p>
+            </div>
+            <div className="hero__panel-card">
+              <Icon name="mail" size={28} />
+              <h2>
+                <a href={company.emailHref}>
+                  <Editable id="company.email">{company.email}</Editable>
+                </a>
+              </h2>
+              <p>
+                <Editable id="header.labels.email">Email</Editable>
+              </p>
+            </div>
+          </>
+        }
       />
 
       <PageSections

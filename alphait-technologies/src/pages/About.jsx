@@ -6,6 +6,7 @@ import PageSections from '../admin/PageSections.jsx'
 import { useCompany, useContent } from '../admin/content-context.js'
 import PageBanner from '../components/PageBanner.jsx'
 import Icon from '../components/Icon.jsx'
+import aboutPhoto from '../assets/about-team.jpg'
 import { industries, stats, technologies } from '../data/site.js'
 
 const pillars = [
@@ -55,6 +56,31 @@ export default function About() {
         id="about.banner"
         title="About Us"
         subtitle={`${company.name} — an IT services firm headquartered in Branchburg, New Jersey.`}
+        image={aboutPhoto}
+        aside={
+          <>
+            <div className="hero__panel-card">
+              <Icon name="target" size={28} />
+              <h2>
+                <Editable id="stats.2.value">{stats[2].value}</Editable>
+              </h2>
+              <p>
+                <Editable id="stats.2.label">{stats[2].label}</Editable>
+              </p>
+            </div>
+            <div className="hero__panel-card">
+              <Icon name="shield" size={28} />
+              <h2>
+                <Editable id="hero.panel.0.title">Quality first</Editable>
+              </h2>
+              <p>
+                <Editable id="hero.panel.0.text">
+                  The 3P&apos;s — Planning, Preparation and Prediction — guide every engagement.
+                </Editable>
+              </p>
+            </div>
+          </>
+        }
       />
 
       <PageSections

@@ -2838,3 +2838,140 @@ html:has(.editor[open]) .cursor {
 .promo__card--single {
   grid-template-columns: 1fr;
 }
+
+/* ------------------------------------------------- announcement: course marquee */
+
+.announce__marquee {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.announce__track {
+  display: flex;
+  width: max-content;
+  animation: announce-marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+.announce__marquee:hover .announce__track,
+.announce__marquee:focus-within .announce__track {
+  animation-play-state: paused;
+}
+
+.announce__list {
+  display: flex;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.announce__list li {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.announce__list li::after {
+  content: '•';
+  margin: 0 18px;
+  opacity: 0.6;
+}
+
+.announce__list a {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.announce__list a:hover {
+  text-decoration: underline;
+}
+
+@keyframes announce-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announce__marquee {
+    overflow-x: auto;
+  }
+
+  .announce__track {
+    animation: none;
+  }
+
+  .announce__list[aria-hidden] {
+    display: none;
+  }
+}
+
+/* ------------------------------------- page banner with photo (home-hero layout) */
+
+.page-banner__photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+}
+
+.page-banner--photo .page-banner__inner {
+  padding: 88px 0 72px;
+  text-align: left;
+}
+
+.page-banner__inner--split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.page-banner--photo h1 {
+  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+  margin-bottom: 18px;
+}
+
+.page-banner--photo p {
+  max-width: 56ch;
+  margin-inline: 0;
+  font-size: 1.06rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.page-banner--photo .crumbs {
+  justify-content: flex-start;
+  margin-top: 22px;
+}
+
+.page-banner__aside {
+  display: grid;
+  gap: 16px;
+}
+
+.page-banner__tools {
+  top: auto;
+  bottom: 14px;
+}
+
+@media (max-width: 900px) {
+  .page-banner__inner--split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .page-banner--photo .page-banner__inner {
+    padding: 64px 0 56px;
+  }
+}
+
+.hero__panel-card h2 a {
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.hero__panel-card h2 a:hover {
+  color: var(--cyan-400);
+}

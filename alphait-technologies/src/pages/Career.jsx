@@ -7,6 +7,7 @@ import { useCompany, useContent, useList } from '../admin/content-context.js'
 import PageBanner from '../components/PageBanner.jsx'
 import Icon from '../components/Icon.jsx'
 import teamPhoto from '../assets/team-meeting.jpg'
+import careersPhoto from '../assets/careers-office.jpg'
 import { jobs } from '../data/site.js'
 
 const FILTERS = ['All', 'Full Time', 'Part Time', 'Contract']
@@ -42,6 +43,27 @@ export default function Career() {
         id="career.banner"
         title="Careers"
         subtitle="We are here to accelerate your job and help you find the way."
+        image={careersPhoto}
+        aside={
+          <>
+            <div className="hero__panel-card">
+              <Icon name="users" size={28} />
+              <h2>{jobList.ids.length}</h2>
+              <p>
+                <Editable id="career.open.eyebrow">Open positions</Editable>
+              </p>
+            </div>
+            <div className="hero__panel-card">
+              <Icon name="shield" size={28} />
+              <h2>
+                <Editable id="career.life.ticks.3">{perks[3]}</Editable>
+              </h2>
+              <p>
+                <Editable id="career.life.ticks.2">{perks[2]}</Editable>
+              </p>
+            </div>
+          </>
+        }
       />
 
       <PageSections
@@ -151,8 +173,8 @@ export default function Career() {
                   id="career.life.photo"
                   src={teamPhoto}
                   alt="Alpha IT team members collaborating on laptops around a table on the rooftop campus"
-                  width="1600"
-                  height="874"
+                  width="1407"
+                  height="768"
                   loading="lazy"
                 />
               </figure>

@@ -42,8 +42,8 @@ export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Training', to: '/training' },
   { label: 'Careers', to: '/career' },
+  { label: 'Trainings', to: '/training' },
   { label: 'Contact Us', to: '/contact' },
 ]
 
@@ -179,6 +179,55 @@ export const jobs = [
     experience: '6+ years',
     summary:
       'Deliver instructor-led classroom and online sessions in cloud, data and web technologies.',
+  },
+]
+
+// Starter course cards for the Trainings page (also scrolled in the top announcement bar).
+// The admin replaces these with the real course details.
+export const trainingCourses = [
+  {
+    title: 'AI & Machine Learning',
+    mode: 'Live online',
+    duration: '12 weeks',
+    level: 'Beginner to advanced',
+    summary:
+      'Python, machine learning models, deep learning and generative AI, finished with a live project.',
+  },
+  {
+    title: 'Cloud Computing (AWS & Azure)',
+    mode: 'Classroom & online',
+    duration: '8 weeks',
+    level: 'Intermediate',
+    summary:
+      'Design, deploy and secure cloud infrastructure, with preparation for associate-level certifications.',
+  },
+  {
+    title: 'Data Science & Analytics',
+    mode: 'Live online',
+    duration: '10 weeks',
+    level: 'Beginner',
+    summary: 'Statistics, SQL, Python and dashboards — turning raw business data into decisions.',
+  },
+  {
+    title: 'Full-Stack Web Development',
+    mode: 'Classroom & online',
+    duration: '12 weeks',
+    level: 'Beginner',
+    summary: 'Modern front-end and back-end development, APIs and deployment, built project by project.',
+  },
+  {
+    title: 'QA Automation Testing',
+    mode: 'Live online',
+    duration: '8 weeks',
+    level: 'Beginner to intermediate',
+    summary: 'Manual testing foundations, Selenium, API testing and CI pipelines for release quality.',
+  },
+  {
+    title: 'Data Warehousing & BI',
+    mode: 'Live online',
+    duration: '8 weeks',
+    level: 'Intermediate',
+    summary: 'ETL, dimensional modelling and reporting on the platforms enterprises run today.',
   },
 ]
 

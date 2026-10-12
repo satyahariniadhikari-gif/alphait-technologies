@@ -5,7 +5,9 @@ import PageSections from '../admin/PageSections.jsx'
 import { useCompany } from '../admin/content-context.js'
 import PageBanner from '../components/PageBanner.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
-import { services } from '../data/site.js'
+import Icon from '../components/Icon.jsx'
+import servicesPhoto from '../assets/services-support.jpg'
+import { services, stats } from '../data/site.js'
 
 const process = [
   { title: 'Discover', text: 'We listen to the business requirement and agree what success looks like.' },
@@ -25,6 +27,18 @@ export default function Services() {
         id="services.banner"
         title="Services"
         subtitle="Consulting, training and application development from a partner that understands the pulse of the global market."
+        image={servicesPhoto}
+        aside={[3, 0].map((i) => (
+          <div key={i} className="hero__panel-card">
+            <Icon name={i === 3 ? 'target' : 'shield'} size={28} />
+            <h2>
+              <Editable id={`stats.${i}.value`}>{stats[i].value}</Editable>
+            </h2>
+            <p>
+              <Editable id={`stats.${i}.label`}>{stats[i].label}</Editable>
+            </p>
+          </div>
+        ))}
       />
 
       <PageSections
