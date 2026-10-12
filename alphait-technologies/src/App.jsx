@@ -14,12 +14,17 @@ import TermsOfService from './pages/TermsOfService.jsx'
 import CookiePolicy from './pages/CookiePolicy.jsx'
 import EqualOpportunity from './pages/EqualOpportunity.jsx'
 import NotFound from './pages/NotFound.jsx'
+import Admin from './pages/Admin.jsx'
+import AdminBar from './admin/AdminBar.jsx'
+import { useSettings } from './admin/content-context.js'
 
 export default function App() {
+  const { customCursor } = useSettings()
+
   return (
     <>
       <ScrollToTop />
-      <CustomCursor />
+      {customCursor ? <CustomCursor /> : null}
       <AnnouncementBar />
       <Header />
       <main id="main">
@@ -33,10 +38,12 @@ export default function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/equal-opportunity" element={<EqualOpportunity />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
+      <AdminBar />
     </>
   )
 }

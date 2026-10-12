@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import Editable from '../admin/Editable.jsx'
 
-export default function PageBanner({ title, subtitle, breadcrumb }) {
+// `id` namespaces the editable title/subtitle, e.g. id="about.banner".
+export default function PageBanner({ id, title, subtitle, breadcrumb }) {
   return (
     <section className="page-banner">
       <div className="hero__bg" aria-hidden="true">
@@ -8,8 +10,10 @@ export default function PageBanner({ title, subtitle, breadcrumb }) {
         <span className="hero__grid" />
       </div>
       <div className="container page-banner__inner">
-        <h1>{title}</h1>
-        {subtitle ? <p>{subtitle}</p> : null}
+        <h1>{id ? <Editable id={`${id}.title`}>{title}</Editable> : title}</h1>
+        {subtitle ? (
+          <p>{id ? <Editable id={`${id}.subtitle`}>{subtitle}</Editable> : subtitle}</p>
+        ) : null}
         <nav className="crumbs" aria-label="Breadcrumb">
           <Link to="/">Home</Link>
           <span aria-hidden="true">/</span>

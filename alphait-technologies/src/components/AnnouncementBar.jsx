@@ -1,30 +1,50 @@
 import { aiProgram, isRegistrationOpen } from '../data/site.js'
-import Icon from './Icon.jsx'
+import Editable from '../admin/Editable.jsx'
+import ButtonLink from '../admin/ButtonLink.jsx'
+import { useSettings, useText } from '../admin/content-context.js'
 
 export default function AnnouncementBar() {
   const open = isRegistrationOpen()
+  const batchLabel = useText('aiProgram.batchLabel', aiProgram.batchLabel)
+  const { showAnnouncement } = useSettings()
+  if (!showAnnouncement) return null
 
   return (
     <div className="announce" role="region" aria-label="Announcement">
       <div className="container announce__inner">
-        <span className="announce__badge">{open ? 'New' : 'Update'}</span>
+        <span className="announce__badge">
+          {open ? (
+            <Editable id="announce.badgeOpen">New</Editable>
+          ) : (
+            <Editable id="announce.badgeClosed">Update</Editable>
+          )}
+        </span>
         <p className="announce__text">
-          <strong>{aiProgram.title}</strong>
+          <strong>
+            <Editable id="aiProgram.title">{aiProgram.title}</Editable>
+          </strong>
           <span>
-            {open
-              ? `${aiProgram.batchLabel} · Limited seats · ${aiProgram.eligibility.join(' & ')} only`
-              : `Registration ends on ${aiProgram.registrationEndLabel} · Next batch date will be updated soon`}
+            {open ? (
+              <Editable id="announce.textOpen">
+                {`${batchLabel} · Limited seats · ${aiProgram.eligibility.join(' & ')} only`}
+              </Editable>
+            ) : (
+              <Editable id="announce.textClosed">
+                {`Registration ends on ${aiProgram.registrationEndLabel} · Next batch date will be updated soon`}
+              </Editable>
+            )}
           </span>
         </p>
-        <a
+        <ButtonLink
+          id="announce.cta"
+          hrefId="aiProgram.registerUrl"
+          to={aiProgram.registerUrl}
           className="announce__cta"
-          href={aiProgram.registerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          icon="arrow"
+          iconSize={16}
         >
           Register now
-          <Icon name="arrow" size={16} />
-        </a>
+        </ButtonLink>
       </div>
     </div>
   )

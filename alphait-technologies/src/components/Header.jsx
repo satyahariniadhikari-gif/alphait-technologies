@@ -1,48 +1,73 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { company, navLinks } from '../data/site.js'
+import { navLinks } from '../data/site.js'
+import Editable from '../admin/Editable.jsx'
+import ButtonLink from '../admin/ButtonLink.jsx'
+import { useCompany, useSettings } from '../admin/content-context.js'
 import logo from '../assets/alpha-logo.jpeg'
 import Icon from './Icon.jsx'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const closeMenu = () => setMenuOpen(false)
+  const company = useCompany()
+  const settings = useSettings()
 
   return (
     <header className="site-header">
       <div className="topbar">
         <div className="container topbar__inner">
           <Link to="/" className="brand" aria-label={`${company.name} home`}>
-            <img className="brand__logo" src={logo} alt={`${company.name} logo`} />
+            <img className="brand__logo" src={settings.logoUrl || logo} alt={`${company.name} logo`} />
             <span className="brand__text">
-              <strong>Alpha IT</strong>
-              <span>Technologies</span>
+              <strong>
+                <Editable id="brand.name">Alpha IT</Editable>
+              </strong>
+              <span>
+                <Editable id="brand.sub">Technologies</Editable>
+              </span>
             </span>
           </Link>
 
+          {settings.showTopbarContacts ? (
           <ul className="topbar__contacts">
             <li>
               <Icon name="pin" size={20} />
               <span>
-                <span className="topbar__label">Address</span>
-                {company.address}
+                <span className="topbar__label">
+                  <Editable id="header.labels.address">Address</Editable>
+                </span>
+                <span>
+                  <Editable id="company.addressLine1">{company.addressLines[0]}</Editable>
+                  {', '}
+                  <Editable id="company.addressLine2">{company.addressLines[1]}</Editable>
+                </span>
               </span>
             </li>
             <li>
               <Icon name="phone" size={20} />
               <span>
-                <span className="topbar__label">Direct</span>
-                <a href={company.phoneHref}>{company.phone}</a>
+                <span className="topbar__label">
+                  <Editable id="header.labels.phone">Direct</Editable>
+                </span>
+                <a href={company.phoneHref}>
+                  <Editable id="company.phone">{company.phone}</Editable>
+                </a>
               </span>
             </li>
             <li>
               <Icon name="mail" size={20} />
               <span>
-                <span className="topbar__label">Email</span>
-                <a href={company.emailHref}>{company.email}</a>
+                <span className="topbar__label">
+                  <Editable id="header.labels.email">Email</Editable>
+                </span>
+                <a href={company.emailHref}>
+                  <Editable id="company.email">{company.email}</Editable>
+                </a>
               </span>
             </li>
           </ul>
+          ) : null}
 
           <button
             type="button"
@@ -73,9 +98,16 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <Link to="/contact" className="btn btn--accent mainnav__cta" onClick={closeMenu}>
-            Request a call back
-          </Link>
+          {settings.showHeaderCta ? (
+            <ButtonLink
+              id="header.cta"
+              to="/contact"
+              className="btn btn--accent mainnav__cta"
+              onClick={closeMenu}
+            >
+              Request a call back
+            </ButtonLink>
+          ) : null}
         </div>
       </nav>
     </header>

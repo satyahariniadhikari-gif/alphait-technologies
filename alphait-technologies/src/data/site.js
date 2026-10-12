@@ -19,6 +19,12 @@ export const web3forms = {
   accessKey: '348ea80c-f24a-4eb0-821c-71ba3029cbf2',
 }
 
+// Google Apps Script web app that serves admin-edited content from the Google Sheet.
+// Leave empty to run the site on the built-in text only. Setup: ADMIN-SETUP.md.
+export const contentApi = {
+  url: import.meta.env.VITE_CONTENT_API_URL || '',
+}
+
 export const legal = {
   domain: 'www.alphait-technologies.com',
   lastUpdated: 'September 30, 2026',
