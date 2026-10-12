@@ -55,7 +55,7 @@ export default function Footer() {
           <ul className="footer__links">
             {serviceIds.map((slug) => (
               <li key={slug}>
-                <Link to="/services">
+                <Link to={slug === 'training' ? '/training' : '/services'}>
                   <Editable id={`services.${slug}.title`}>{serviceBySlug[slug]?.title ?? ''}</Editable>
                 </Link>
               </li>

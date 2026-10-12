@@ -79,7 +79,7 @@ export default function EqualOpportunity() {
         <p>
           <Editable id="eeo.s5.p1.a">See our current openings on the</Editable>{' '}
           <Link to="/career">
-            <Editable id="eeo.s5.p1.link">Career</Editable>
+            <Editable id="eeo.s5.p1.link">Careers</Editable>
           </Link>{' '}
           <Editable id="eeo.s5.p1.b">page.</Editable>
         </p>

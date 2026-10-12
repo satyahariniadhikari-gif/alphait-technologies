@@ -80,7 +80,7 @@ export default function EditorDialog({ id, value, fallback, link, edited, onSave
               list="editor-pages"
             />
             <datalist id="editor-pages">
-              {['/', '/about', '/services', '/career', '/contact', '/#callback'].map((path) => (
+              {['/', '/about', '/services', '/training', '/career', '/contact', '/#callback'].map((path) => (
                 <option key={path} value={path} />
               ))}
             </datalist>

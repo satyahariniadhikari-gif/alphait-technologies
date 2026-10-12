@@ -42,7 +42,8 @@ export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Career', to: '/career' },
+  { label: 'Training', to: '/training' },
+  { label: 'Careers', to: '/career' },
   { label: 'Contact Us', to: '/contact' },
 ]
 

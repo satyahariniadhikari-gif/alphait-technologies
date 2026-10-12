@@ -40,7 +40,7 @@ export default function Career() {
     <>
       <PageBanner
         id="career.banner"
-        title="Career"
+        title="Careers"
         subtitle="We are here to accelerate your job and help you find the way."
       />
 
