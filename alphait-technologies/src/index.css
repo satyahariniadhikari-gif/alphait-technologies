@@ -2826,3 +2826,15 @@ html:has(.editor[open]) .cursor {
 .has-custom-cursor .editable-icon select {
   cursor: pointer !important;
 }
+
+.stats--single {
+  grid-template-columns: 1fr;
+}
+
+.stats--single li {
+  border-right: 0;
+}
+
+.promo__card--single {
+  grid-template-columns: 1fr;
+}

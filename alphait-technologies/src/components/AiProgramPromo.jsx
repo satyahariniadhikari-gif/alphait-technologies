@@ -2,21 +2,20 @@ import { aiProgram, daysUntilBatch, isRegistrationOpen } from '../data/site.js'
 import Editable from '../admin/Editable.jsx'
 import EditableList from '../admin/EditableList.jsx'
 import ButtonLink from '../admin/ButtonLink.jsx'
-import { useCompany, useText } from '../admin/content-context.js'
+import { useCompany } from '../admin/content-context.js'
 import Icon from './Icon.jsx'
 
 export default function AiProgramPromo() {
   const daysLeft = daysUntilBatch()
   const open = isRegistrationOpen()
   const company = useCompany()
-  const batchLabel = useText('aiProgram.batchLabel', aiProgram.batchLabel)
   const eligibility = aiProgram.eligibility.join(' & ')
   const eligibilityCandidates = aiProgram.eligibility.map((c) => `${c} candidates`).join(' & ')
 
   return (
     <section className="section promo" id="ai-program" aria-labelledby="ai-program-title">
       <div className="container">
-        <div className="promo__card">
+        <div className={`promo__card${open ? '' : ' promo__card--single'}`}>
           <div className="promo__glow" aria-hidden="true" />
 
           <div className="promo__main">
@@ -73,8 +72,8 @@ export default function AiProgramPromo() {
             />
           </div>
 
-          <aside className="promo__side">
-            {open ? (
+          {open ? (
+            <aside className="promo__side">
               <div className="promo__date">
                 <span className="promo__date-label">
                   <Editable id="aiProgram.startsLabel">Batch starts</Editable>
@@ -92,52 +91,30 @@ export default function AiProgramPromo() {
                   <Editable id="aiProgram.countdownSuffix">to go</Editable>
                 </span>
               </div>
-            ) : (
-              <div className="promo__date">
-                <span className="promo__date-label">
-                  <Editable id="aiProgram.batchLabel">{aiProgram.batchLabel}</Editable>
-                </span>
-                <strong>
-                  <Editable id="aiProgram.registrationEnds">
-                    {`Registration ends on ${aiProgram.registrationEndLabel}`}
-                  </Editable>
-                </strong>
-                <p className="promo__date-note">
-                  <Editable id="aiProgram.closedNote">
-                    {`Registration for the ${batchLabel} has closed. We'll update you with the next batch date soon.`}
-                  </Editable>
-                </p>
-              </div>
-            )}
 
-            <ul className="promo__facts">
-              <li>
-                <Icon name="pin" size={18} />
-                <span>
-                  <Editable id="aiProgram.eligibilityFact">
-                    {`Eligibility: ${eligibilityCandidates} only`}
-                  </Editable>
-                </span>
-              </li>
-              <li>
-                <Icon name="clock" size={18} />
-                <span>
-                  {open ? (
+              <ul className="promo__facts">
+                <li>
+                  <Icon name="pin" size={18} />
+                  <span>
+                    <Editable id="aiProgram.eligibilityFact">
+                      {`Eligibility: ${eligibilityCandidates} only`}
+                    </Editable>
+                  </span>
+                </li>
+                <li>
+                  <Icon name="clock" size={18} />
+                  <span>
                     <Editable id="aiProgram.seatsOpen">Limited seats available</Editable>
-                  ) : (
-                    <Editable id="aiProgram.seatsClosed">Seats open again with the next batch</Editable>
-                  )}
-                </span>
-              </li>
-              <li>
-                <Icon name="mail" size={18} />
-                <a href={company.emailHref}>
-                  <Editable id="company.email">{company.email}</Editable>
-                </a>
-              </li>
-            </ul>
+                  </span>
+                </li>
+                <li>
+                  <Icon name="mail" size={18} />
+                  <a href={company.emailHref}>
+                    <Editable id="company.email">{company.email}</Editable>
+                  </a>
+                </li>
+              </ul>
 
-            {open ? (
               <ButtonLink
                 id="aiProgram.ctaOpen"
                 hrefId="aiProgram.registerUrl"
@@ -148,19 +125,8 @@ export default function AiProgramPromo() {
               >
                 Register now &amp; reserve your spot
               </ButtonLink>
-            ) : (
-              <ButtonLink
-                id="aiProgram.ctaClosed"
-                hrefId="aiProgram.registerUrl"
-                to={aiProgram.registerUrl}
-                className="btn btn--accent promo__cta"
-                icon="arrow"
-                iconSize={16}
-              >
-                Register now
-              </ButtonLink>
-            )}
-          </aside>
+            </aside>
+          ) : null}
         </div>
       </div>
     </section>

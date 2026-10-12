@@ -30,21 +30,23 @@ export default function AnnouncementBar() {
               </Editable>
             ) : (
               <Editable id="announce.textClosed">
-                {`Registration ends on ${aiProgram.registrationEndLabel} · Next batch date will be updated soon`}
+                Next batch date will be updated soon
               </Editable>
             )}
           </span>
         </p>
-        <ButtonLink
-          id="announce.cta"
-          hrefId="aiProgram.registerUrl"
-          to={aiProgram.registerUrl}
-          className="announce__cta"
-          icon="arrow"
-          iconSize={16}
-        >
-          Register now
-        </ButtonLink>
+        {open ? (
+          <ButtonLink
+            id="announce.cta"
+            hrefId="aiProgram.registerUrl"
+            to={aiProgram.registerUrl}
+            className="announce__cta"
+            icon="arrow"
+            iconSize={16}
+          >
+            Register now
+          </ButtonLink>
+        ) : null}
       </div>
     </div>
   )
